@@ -63,29 +63,24 @@ const cats = [
   }
 ]
 
-app.get('/', function(req, res) {
-  res.send('Welcome to the cat api')
-})
+app.get('/', (req, res) => res.send('Welcome to the cat api'))
 
-app.get('/breeds', function(req, res) {
-  res.send(filter(breedFilter, cats))
-})
+app.get('/breeds', (req, res) => res.send(filter(breedFilter, cats)))
 
-app.get('/breeds/:id', function(req, res) {
+app.get('/breeds/:id', (req, res) =>
   res.send(
     compose(find(breed => breed.id === req.params.id), filter(breedFilter))(
       cats
     )
   )
-})
+)
 
-app.get('/cats', function(req, res) {
-  res.send(filter(catFilter, cats))
-})
+app.get('/cats', (req, res) => res.send(filter(catFilter, cats)))
 
-app.get('/cats/:id', function(req, res) {
-  const catID = req.params.id
-  res.send(compose(find(cat => cat.id === catID), filter(catFilter))(cats))
-})
+app.get('/cats/:id', (req, res) =>
+  res.send(
+    compose(find(cat => cat.id === req.params.id), filter(catFilter))(cats)
+  )
+)
 
 app.listen(port, () => console.log('API is up on port', port))
