@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express()
 const { filter, find, compose } = require('ramda')
-const breedFilter = item => item.type === 'breed'
-const catFilter = item => item.type === 'cat'
+
+const typeFilter = type => item => item.type === type
+const breedFilter = typeFilter('breed')
+const catFilter = typeFilter('cat')
 
 const port = 4000
 
@@ -78,13 +80,12 @@ app.get('/breeds/:id', function(req, res) {
 })
 
 app.get('/cats', function(req, res) {
-  const catFilter = obj => obj.type === 'cat'
   res.send(filter(catFilter, cats))
 })
 
 app.get('/cats/:id', function(req, res) {
   const catID = req.params.id
-  res.send(compose(find(breed => breed.id === catID), filter(catFilter))(cats))
+  res.send(compose(find(cat => cat.id === catID), filter(catFilter))(cats))
 })
 
 app.listen(port, () => console.log('API is up on port', port))
