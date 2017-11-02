@@ -83,4 +83,4 @@ app.get('/cats/:id', function(req, res) {
   res.send(catID)
 })
 
-app.listen(port, () => console.log('API is up one port', port))
+app.listen(port, () => console.log('API is up on port', port))

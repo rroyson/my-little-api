@@ -11,3 +11,20 @@ $ git clone https://github.com/rroyson/my-little-api.git
 $ npm install
 $ npm start
 ```
+
+
+## Endpoints
+
+### `/`
+
+### GET breeds - `/breeds`
+Retrieves a collection of cat breeds
+
+### GET breed - `/breeds/{id}`
+Retrieves a list of a certain breed of cats
+
+### GET cats - `/cats`
+Retrieves a collection of cat
+
+### GET cat - `/cats/{id}`
+Retrieves a certain cat
