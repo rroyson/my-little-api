@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const { filter } = require('ramda')
 const port = 4000
 
 const cats = [
@@ -58,24 +59,27 @@ const cats = [
 ]
 
 app.get('/', function(req, res) {
-  // console.log('req', req)
-  // console.log('res', res)
   res.send('Welcome to the cat api')
 })
 
 app.get('/breeds', function(req, res) {
   // console.log('req', req)
   // console.log('res', res)
-  res.send('/breeds works')
+  const breeds = obj => obj.type === 'breed'
+
+  res.send(filter(breeds, cats))
 })
 
 app.get('/breeds/:id', function(req, res) {
+  const breeds = obj => obj.type === 'breed'
+  const breedFilter = filter(breeds, cats)
   const breedID = req.params.id
-  res.send(breedID)
+  res.send('this works')
 })
 
 app.get('/cats', function(req, res) {
-  res.send('/cats works')
+  const catFilter = obj => obj.type === 'cat'
+  res.send(filter(catFilter, cats))
 })
 
 app.get('/cats/:id', function(req, res) {
